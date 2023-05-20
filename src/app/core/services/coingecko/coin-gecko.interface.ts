@@ -2,10 +2,8 @@ interface Sparkline {
     price: number[]
 }
 
-export interface Markets {
+export interface Asset {
     id: string
     symbol: string
     name: string
-    image: string
-    sparkline_in_7d: Sparkline[]
 }

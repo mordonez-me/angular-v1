@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Markets } from './coin-gecko.interface';
+import { Asset } from './coin-gecko.interface';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -8,19 +9,11 @@ import { Markets } from './coin-gecko.interface';
 })
 export class CoinGeckoService {
 
-  API = "https://api.coingecko.com/api/v3/"
+  API = "https://api.coincap.io/v2"
 
   constructor(private http: HttpClient) { }
 
-  markets() {
-    return this.http.get<Markets>(`${this.API}/coins/markets`, {
-      params: {
-        'vs_currency': 'usd',
-        'order': 'market_cap_desc',
-        'per_page': 100,
-        'page': 1,
-        'sparkline': true
-      }
-    })
+  getAssets(): Observable<Asset[]> {
+    return this.http.get<Asset[]>(`${this.API}/assets`)
   }
 }

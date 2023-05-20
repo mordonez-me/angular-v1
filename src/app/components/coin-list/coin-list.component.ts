@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Asset } from 'src/app/core/services/coingecko/coin-gecko.interface';
 import { CoinGeckoService } from 'src/app/core/services/coingecko/coin-gecko.service';
 
 @Component({
@@ -8,13 +9,17 @@ import { CoinGeckoService } from 'src/app/core/services/coingecko/coin-gecko.ser
 })
 export class CoinListComponent {
 
+  response!: Asset[] 
+
   constructor(private coingeckoService: CoinGeckoService) {
-    this.getMarket()
+    this.getAssets()
   }
 
-  getMarket() {
-    this.coingeckoService.markets().subscribe((response) => {
-      console.log('response', response)
+  getAssets() {
+    this.coingeckoService.getAssets().subscribe((responseApi) => {
+      console.log('response', responseApi)
+      this.response = responseApi
+
     })
   }
 }
